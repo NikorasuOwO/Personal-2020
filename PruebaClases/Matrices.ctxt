@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Matrices
+comment1.params=A
+comment1.target=Matrices(double[][])
+comment2.params=
+comment2.target=void\ Mshow()
+comment3.params=B
+comment3.target=void\ MMult(double[][])
+comment4.params=args
+comment4.target=void\ main(java.lang.String[])
+numComments=5

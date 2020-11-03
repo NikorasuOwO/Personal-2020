@@ -27,7 +27,7 @@ public class Point{
         return y;
     }
     
-    public void setX(double X){
+    public void setX(double X) {
         this.x = X;
     }
     

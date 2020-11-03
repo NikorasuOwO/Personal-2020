@@ -2,17 +2,9 @@ package PruebaClases;
 
 public class Matrices{
     
-    private double A[][];
-    
-    public Matrices(double A[][]){
+    public static void Mshow(double A[][]){
         
-        this.A = A;
-        
-    }
-        
-    public void Mshow(){
-        
-        byte n = (byte) this.A.length;
+        byte n = (byte) A.length;
         
         for (byte i = 0; i < n; i++){
             
@@ -20,14 +12,14 @@ public class Matrices{
             
             for(byte j = 0 ; j < n; j++){
             
-                System.out.print(this.A[i][j]+" ");
+                System.out.print(A[i][j]+" ");
                 
             }
         }
         //return 0;
        }
        
-       public void MMult(double B[][]){
+       public static void MMult(double A[][], double B[][]){
         
            //A es una matriz na x ma //B es una matriz nb x mb
            int na = A.length;
@@ -49,20 +41,18 @@ public class Matrices{
                 
             }
         }
-           Matrices Cm = new Matrices(C);
-           Cm.Mshow();
+           Mshow(C);
        }
        
        public static void main(String[] args){
            
            double A[][] = {{150,120},{150,120}};
            
-           Matrices Am = new Matrices(A);
-           Am.Mshow();
+           Mshow(A);
            
-           double B[][] = {{2,0},{0,2}};
+           double B[][] = {{2,0},{0,2}}; // 2*I2
            
-           Am.MMult(B);
+           MMult(A,B);
            
            //MMult(B);
         

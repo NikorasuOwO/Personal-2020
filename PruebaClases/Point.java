@@ -26,4 +26,12 @@ public class Point{
     public double getY(){
         return y;
     }
+    
+    public void setX(double X){
+        this.x = X;
+    }
+    
+    public void setY(double Y){
+        this.y = Y;
+    }
 }

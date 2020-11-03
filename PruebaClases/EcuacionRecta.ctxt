@@ -1,5 +1,5 @@
 #BlueJ class context
-comment0.target=DeclaracionClases
+comment0.target=EcuacionRecta
 comment1.params=P\ Q
 comment1.target=java.lang.String\ ecrectalineal(Point,\ Point)
 comment2.params=args

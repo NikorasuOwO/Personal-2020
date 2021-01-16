@@ -5,49 +5,37 @@ import time
 import math
 import random
 import statistics as st
-import os
 import pandas
+import Funcion
 
-def funcion(a):
-    return round(1.0/math.sqrt(round(a)))
-
+## VARIABLES ##
 vector = []
-
-n = 100
-l = 100000
-rango = (1,n)
-lg = (0,l)
-kmax = 10
-k = 1
-tiempos = []
+n = 100      # Rango máximo de los números
+l = 100000   # Número de cálculos
+rango = (1,n)# Tupla rango de los números
+lg = (0,l)   # Tupla numero de cálculos (accesos a vector)
+kmax = 10    # Número de repeticiones
 vector2 = [0]*l # Creamos vector2, un array con n ceros.
 
-if( 4 < ( n * 32 / (1024*1024*1024) )* kmax ):
-    input("Mucho n o k bro: n: " + str(n) + "k: " + str(k))
+# INIT #
+k = 1
 
-    #os.sys.exit() ó #exit() ó quit() Es lo mismo.
+for i in range(lg[0],lg[1]): # Ponemos en vector numeros aleatorios
+    vector.append(random.randint(rango[0],rango[1]))
 
-    kmax = -1
-for i in range(lg[0],lg[1]):
-    vector.append(random.uniform(rango[0],rango[1]))
+TiempoTOTAL = time.time() # Empezamos a contar el tiempo total de cálculo
 
-
-TiempoTOTAL = time.time()
-
+# Empezamos las kmax repeticiones
 while(k <= kmax):
-    i = 0
-    start_time = time.time()
-    for i in range(lg[0],lg[1]):
-    #    print(i)
-        a = vector[i]
-        vector2[i] = funcion(a)
 
-    tiempos.append(time.time()-start_time)
-    print("TIEMPO:" + "(" + str(k) + ")" + str(time.time()-start_time))
+    Funcion.funcion_al_vector(vector, vector2)
     k = k + 1
 
+# repeticiones acabadas, dejamos de contar el tiempo total.
 TiempoTOTAL = time.time() - TiempoTOTAL
-media = st.mean(tiempos)
-print("\n\n RESULTADOS:   MEDIA: " + str(media) + "  | TIEMPO TOTAL: "+ str(TiempoTOTAL))
-
-input("\n\n\n**** FIN DEL PROGRAMA **** ")
+# Sacamos la media de los tiempos de ejecución de l operaciones,
+#   con el vector tiempos que rellena la función
+media = st.mean(Funcion.tiempos)
+# Imprimimos los resultados! #
+print("\n\n RESULTADOS SQRT:   MEDIA: " + str(media) + "  | TIEMPO TOTAL: "+ str(TiempoTOTAL))
+input("\n\n\n **** FIN DEL PROGRAMA **** ")

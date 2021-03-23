@@ -1,5 +1,5 @@
 
-package PruebaClases;
+ 
 
 public class Point{
     

@@ -1,4 +1,4 @@
-    package PruebaClases;
+     
     
     public class Matrices{
         
@@ -67,9 +67,22 @@
                double Det = A[0][0]*A[1][1] - A[0][1]*A[1][0] ;
                return Det;
             }
-            return 0;
+            return -12345;
             }
-           
+            
+           public static double MDetN(double[][] A, int n){
+               
+               double det = 0;
+               int signo = 1;
+               
+               for(int i = 0 ; i < n ; i++){
+                   
+                   //det = det + signo*MDetN(_A_, _n_);
+                   //signo = signo * -1 ;
+               }
+               
+               return 0;
+           }
            public static double MDet3(double[][] A){
                
                double[][] Menor0 = new double[2][2];
@@ -167,6 +180,8 @@
            System.out.println("\n Det: " + MDet3(A));
            
            Mshow(MInverse3(A));
+           
+           Mshow(MInverse3(MInverse3(A)));
            
            //Mshow(MMultScalar(A,2));
            

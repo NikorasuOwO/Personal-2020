@@ -1,3 +1,5 @@
+package PruebaClases;
+
      
     
     public class Matrices{
@@ -67,22 +69,67 @@
                double Det = A[0][0]*A[1][1] - A[0][1]*A[1][0] ;
                return Det;
             }
-            return -12345;
+            return -1234567;
             }
-            
-           public static double MDetN(double[][] A, int n){
+           public static double[] addArray(double[] a, double valor){
                
-               double det = 0;
-               int signo = 1;
-               
-               for(int i = 0 ; i < n ; i++){
-                   
-                   //det = det + signo*MDetN(_A_, _n_);
-                   //signo = signo * -1 ;
-               }
-               
-               return 0;
+               double[] a2 = new double[a.length+1];
+               a2[a.length] = valor;
+               for(int i = 0 ; i < a.length; i++){a2[i] = a[i];}
+               return a2;
            }
+           
+           public static boolean esta_en_array(int[]a, int v){
+            
+               for(int i = 0; i < a.length ; i++){
+                   if(a[i] == v){return true;}
+               }
+               return false;
+           }
+           
+           public static int Buscar(int[]a, int n){
+           //Buscamos el entero de 0 a n que no pertece a "a".
+           for(int i = 0; i < n; i++){
+               if(!esta_en_array(a, i)){
+                   return i;
+               }else{;}
+               
+           }
+           return 0;
+           }
+           
+           public static double MDetN(double[][] A, int n, int[] rows, int[] cols){ //START: out = {}
+               double r = 0;
+               if(rows.length == n-1 && cols.length == n-1){ //BASE 2x2
+                   //Bucsamos la linea que hemos quitado
+                   int row = Buscar(rows, n);
+                   //Ahora buscamos columna
+                   int col = Buscar(cols, n);
+                   System.out.println("row:" + row + "col:"+col);
+                   return A[row][col];
+                   
+               }else{
+                   for(int i = 0 ; i < n ; i++){
+                   
+                       r = r + A[0][i]*Math.pow(-1, 1+i+1)*MDetN();
+                    
+                   }
+     
+               }
+               return r;
+           }
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
            public static double MDet3(double[][] A){
                
                double[][] Menor0 = new double[2][2];

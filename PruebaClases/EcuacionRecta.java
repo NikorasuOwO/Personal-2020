@@ -1,3 +1,5 @@
+package PruebaClases;
+
  
 
 import javax.swing.JFrame;

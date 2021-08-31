@@ -5,24 +5,78 @@
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
     <head>
+
+        {% load static %}
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css'>
+  
+         <link rel="stylesheet" type="text/css" href="{% static '/styles.css' %}">
     </head>
+
+
     <body>
-        <h1>Weather App</h1>
+        
+        <h1 class="heading">Weather App</h1>
 
-        <p>{{raw}}</p>
+        <br><br>
+        <p>Currently displaying forecast for <strong> {{current_city}}, {{current_country}} </strong></p>
+        <form method="POST" action="{% url 'home2'%}">
+            {% csrf_token %}
+            <label for="country">Select yout country:</label>
+            <select name="country">
+                {% for country in country_codes %}
+                    <option value="{{country.code}}" {% if country.name == current_country %}selected{% endif %}>{{country.name}}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <label for="city">City:</label>
+            <input name="city" value="{{current_city}}">
+            <select name="lang">
+                <option value="es" {% ifequal lang 'es' %}selected{% endifequal %}>Español</option>
+                <option value="fr" {% ifequal lang 'fr' %}selected{% endifequal %}>Français</option>
+                <option value="en" {% ifequal lang 'en' %}selected{% endifequal %}>English</option>
+                <option value="pt" {% ifequal lang 'pt' %}selected{% endifequal %}>Português</option>
+                <option value="it" {% ifequal lang 'it' %}selected{% endifequal %}>Italiano</option>
+                <option value="de" {% ifequal lang 'de' %}selected{% endifequal %}>Deutsch</option>
+                <option value="ar" {% ifequal lang 'ar' %}selected{% endifequal %}>عرب</option>
+            </select>
+            <br>
 
-        <h2>Today in Valencia:<h2>
+            <button type="submit">Go</button>
+        </form>
 
-        <img src="http://openweathermap.org/img/wn/{{icon}}@2x.png">
-        <p>
-            {{temp}}ºC
-        </p>
+    <div class="main-container">
+
+        {% for item in reduced_list %}
+        <div class="card">
+
+            <h2 class="">{{item.day}}</h2>
+            
+            <img class="" src="http://openweathermap.org/img/wn/{{item.icon}}@2x.png">
+            
+            <p class="card__temp">{{item.temp}}ºC </p>
+
+            <p class="" >Máx: {{item.max}}ºC</p>
+            <p class="card__min">Min: {{item.min}}ºC</p>
+
+            <!--<p class="card__humidity">Humidity {{humidity}}</p>-->
+            <p class="card__description">{{item.description}}</p>
+            <!-- <p class="card__wind">Wind speed {{windspeed}}</p> -->
+
+        </div>
+        {% endfor %}
+
+    </div>
 
     </body>
+
+    <footer style="text-align: center;">
+    <p>App made by Nicolás Bermell</p>
+    <p>Free to use and modify: <a href="//www.github.com/NikorasuOwO">www.github.com/NikorasuOwO<a></p>
+    </footer>
+
 </html>

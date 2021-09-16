@@ -1,8 +1,4 @@
-package PruebaClases;
-
-     
-    
-    public class Matrices{
+ public class Matrices{
         
         public static void Mshow(double A[][]){
             
@@ -100,18 +96,18 @@ package PruebaClases;
            
            public static double MDetN(double[][] A, int n, int[] rows, int[] cols){ //START: out = {}
                double r = 0;
-               if(rows.length == n-1 && cols.length == n-1){ //BASE 2x2
-                   //Bucsamos la linea que hemos quitado
+               if(rows.length == n-1 && cols.length == n-1){ //BASE 1x1
+                   //Bucsamos la linea que no hemos quitado
                    int row = Buscar(rows, n);
                    //Ahora buscamos columna
                    int col = Buscar(cols, n);
-                   System.out.println("row:" + row + "col:"+col);
+                   //System.out.println("row:" + row + "col:"+col);
                    return A[row][col];
-                   
                }else{
                    for(int i = 0 ; i < n ; i++){
-                   
-                       r = r + A[0][i]*Math.pow(-1, 1+i+1)*MDetN();
+                       
+                       int sign = (int) Math.pow(-1, 1+(i+1));
+                       r = r + A[0][i]*sign*MDetN();
                     
                    }
      

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static '/tasks/styles.css' %}">
+</head>
+
+<body>
+<h1 class="heading">To Do App</h1>
+
+<form method="POST" action="/">
+    {% csrf_token %}
+    {{form.title}}
+
+    <input type="submit" name="Create Task">
+</form>
+
+
+{% for task in tasks %}
+
+    <div>
+        <form id="toggle_form" method="post" action="{% url 'toggle_task' task.pk%}">{% csrf_token %}</form>
+
+        <form id="delete_form" method="post" action="{% url 'delete_task' task.pk%}">{% csrf_token %}</form>
+        
+        <p>
+        <input type="checkbox" onclick="document.getElementById('toggle_form').submit();" {% if task.complete %}checked {% endif %}>
+         {{task.title}} <a href="{% url 'update_task' task.pk%}">Change</a>
+         <a onclick="document.getElementById('delete_form').submit();">DELETE</a>
+         </p>
+    
+    </div>
+
+{% endfor %}
+
+    <div class="card card-1">
+      <p class="card__exit"><i class="fas fa-times"></i></p>
+      <h2 class="card__title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+      <p class="card__apply">
+        <a class="card__link" href="#">Update <i class="fas fa-arrow-right"></i></a>
+      </p>
+    </div>
+
+    <body>
+
+    <html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        {% load static %}
+        {% load Store_extras %}
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Shoes store</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static '/styles.css' %}">
+    </head>
+    <body>
+        <h1>Nicolas' shoes store</h1>
+        <p>We currently have {{number}} products</p>
+        <div class="container">
+        
+        <form action="{% url 'store' %}" method="post">
+        
+            {% csrf_token %}
+            <h2>Filter</h2>
+            {{filter_form.as_p}}
+
+            <input type="submit" value="Find">
+
+        </form>
+            {% for prod in products%}
+                <div class="card" onclick="location.href = 'product/{{prod.id}}/';">
+                    <h2>{{prod.name}}</h2>
+                    <img src="{% static '/media/'|addstr:prod.image %}" style="height:40%">
+                    <p>{{prod.description}}</p>
+                    <strong>${{prod.price}}</strong>
+                </div>
+            {%endfor%}
+        </div>
+        <script src="" async defer></script>
+    </body>
+</html>

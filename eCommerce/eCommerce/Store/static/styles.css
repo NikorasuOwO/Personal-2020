@@ -1,25 +1,81 @@
+body {
+  background-image: url("media/pink3.jpg");
+}
+
+h1, h2 {
+  font-family: Rubik;
+  text-align: center; 
+  text-shadow: 3px 3px rgb(255, 2, 120);
+}
+
+.form_type {
+  text-align: center;
+  text-shadow: rgb(255, 255, 255);
+}
+
+p {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: 800;
+}
+
+.title{
+  text-align: center;
+  font-family: Rubik;
+  font-weight: 800;
+  text-shadow: 3px 3px rgb(246, 67, 157);
+  border-color: red;
+  
+}
+
+.reglog {
+  
+  margin: 15px;
+
+  width: 300px;
+  height: 360px;
+
+  border-radius: 10px;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s;
+
+  font-weight: 500;
+  color: rgb(5, 0, 5);
+  font-size: auto;
+  text-align: right;
+
+  justify-items: right;
+  align-items: right;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  text-align: center;
+
+}
 
 .container {
-    justify-content: auto;
+    justify-content:safe;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: auto;
 
 
 }
+
+
 .card {
   
-    margin: 50px;
+    margin: 15px;
 
     width: 300px;
     height: 360px;
   
     border-radius: 10px;
-    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 3px 5px rgb(146, 3, 122);
     transition: all 0.2s;
 
     font-weight: 500;
-    color: rgb(5, 5, 151);
+    color: rgb(110, 4, 75);
     font-size: auto;
     text-align: left;
 
@@ -30,6 +86,8 @@
     margin-right: auto;
 
     text-align: center;
+    background-color: white;
+    background-image: url("media/pink1.jpg");
 
   }
 
@@ -37,3 +95,64 @@
 
     transform: scale(1.05);
   }
+
+  .menu{
+
+    width: 2%;
+
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-weight: 500;
+    font-size: 110%;
+  }
+
+  .nav-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  overflow: hidden;
+  }
+
+
+  .nav-list a{
+    float: left;
+    color: white;
+    text-shadow: 2px 2px rgb(251, 58, 148);
+    text-align: center;
+    padding: 15px 15px 15px 15px;
+    text-decoration:none;
+    font-size: 2em;
+    background-image: url("media/pink1.jpg");
+  }
+
+  .nav-list a.left{
+
+    border-bottom-left-radius: 25px;
+    border-top-left-radius: 25px;
+  }
+
+  .nav-list a.right{
+
+    border-bottom-right-radius: 25px;
+    border-top-right-radius: 25px;
+  }
+
+  .nav-list a:hover {
+    border-color: rgb(251, 58, 148);
+    color: black;
+  }
+
+  .nav-list a.active {
+    color: rgb(0, 0, 0);
+    text-decoration-color: rgb(255, 255, 255);
+    text-decoration-line:underline;
+  }
+
+  .nav-list > li::before {
+    content: "";
+}

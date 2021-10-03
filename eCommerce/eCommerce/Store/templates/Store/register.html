@@ -1,0 +1,69 @@
+{% extends 'Store/base.html' %}
+
+        {% load static %}
+        {% load Store_extras %}
+
+{% block content %}
+
+<div class="reglog">
+
+    <h1>Register</h1>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <p>
+            {{form.username.label}}
+            {{form.username}}
+            {% for error in form.username.errors %}
+                {{ error }}
+            {% endfor %}
+        </p>
+
+        <p>
+            {{form.first_name.label}}
+            {{form.first_name}}
+            {% for error in form.first_name.errors %}
+                {{ error }}
+            {% endfor %}
+        </p>
+
+        <p>
+            {{form.last_name.label}}
+            {{form.last_name}}
+            {% for error in form.last_name.errors %}
+                {{ error }}
+            {% endfor %}
+        </p>
+
+        <p>
+            {{form.email.label}}
+            {{form.email}}
+            {% for error in form.email.errors %}
+                {{ error }}
+            {% endfor %}
+        </p>
+
+        <p>
+            {{form.password1.label}}
+            {{form.password1}}
+            
+            {% for error in form.password1.errors %}
+                {{ error }}
+            {% endfor %}
+        </p>
+
+        <p>
+            {{form.password2.label}}
+            {{form.password2}}
+            
+            {% for error in form.password1.errors %}
+                {{ error }}
+            {% endfor %}
+        </p>
+        <br>
+        <input type="submit" name="Create User">
+    </form>
+</div>
+
+{% endblock %}

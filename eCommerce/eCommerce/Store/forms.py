@@ -1,4 +1,14 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
+
+class CreateUserForm(UserCreationForm):
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2', 'last_name', 'first_name']
+
 
 class FilterForm(forms.Form):
 
@@ -15,10 +25,12 @@ class FilterForm(forms.Form):
     )
     ]
 
-    usage_tuple = [
+    type_tuple = [
 
-        ('running','Running'),
-        ('hiking', 'Hiking')
+        ('sneakers','Sneakers'),
+        ('boots', 'Boots'),
+        ('shoes', 'shoes'),
+        ('any','Any')
     ]
 
     color_tuple = [
@@ -28,10 +40,18 @@ class FilterForm(forms.Form):
         ('brown', 'Brown'),
         ('gray', 'Gray'),
         ('white', 'White'),
-        ('celeste', 'Celeste')
+        ('celeste', 'Celeste'),
+        ('pink', 'Pink'),
+            ('any','Any')
     ]
 
-    usage = forms.ChoiceField(label="Usage", choices=usage_tuple)
+    type = forms.ChoiceField(label="Type", choices=type_tuple)
     color = forms.ChoiceField(label="Contains color", choices=color_tuple)
-    price_below = forms.FloatField(label="Price is below")
+    price_below = forms.FloatField(label="Price is below", required=False)
     order = forms.ChoiceField(label="Order by", choices=order_tuple)
+
+    class Meta:
+        fields = ('type', 'color', 'price_below', 'order')
+        widgets = {'type': forms.Select(attrs={'id': 'my_HTML_id', 'class': 
+                   'form_type'})}
+

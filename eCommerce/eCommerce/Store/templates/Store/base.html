@@ -1,0 +1,35 @@
+   <html>
+    <head>
+        {% load static %}
+        {% load Store_extras %}
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Shoes store</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static '/styles.css' %}">
+    </head>
+    <body>
+        <header>
+                <h1 class="title">👟 Nicolas' shoes store 👞 🥾 </h1>
+            <nav>
+                </a>
+                <ul class="nav-list">
+                    <item><a href="{% url 'store' %}" class="left">Home</a></item>
+                    <item><a {%if request.path == "/store/"%} class="active" {% endif %} href="{% url 'store' %}">Store</a></item>
+                    <item><a href="#">About</a></item>
+                    <item><a href="#">Contact</a></item>
+                    <item><a {%if request.path == "/register/"%} class="active" {% endif %} href="{% url 'register' %}">Register</a></item>
+                    <item><a {%if request.path == "/login/"%} class="active" {% endif %} class="right" href="{% url 'login' %}">Login</a></item>
+                </ul>
+
+            </nav>
+        </header>
+
+        {% block content %}
+        
+        {% endblock%}
+
+      </body>
+        </html>

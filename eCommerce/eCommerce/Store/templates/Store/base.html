@@ -12,7 +12,8 @@
     </head>
     <body>
         <header>
-                <h1 class="title">👟 Nicolas' shoes store 👞 🥾 </h1>
+                <h1 class="title">👟 Nicolas' shoes store 👞 🥾</h1>
+                <h2>Welcome {% if request.user.is_authenticated %} {{request.user}} <a href="{% url 'logout' %}">❌</a> {% endif %}</h2>
             <nav>
                 </a>
                 <ul class="nav-list">

@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
 from . import forms
 from django.db.models import Q
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 # Create your views here.
 
@@ -62,11 +63,6 @@ def view_prod(request, id):
 
     return render(request, 'Store/product.html', context)
 
-def login_view(request):
-    context = {}
-    formlog = User
-    return render(request, 'Store/login.html', context)
-
 def register_view(request):
     form = forms.CreateUserForm()
 
@@ -78,3 +74,26 @@ def register_view(request):
 
     context = {'form':form}
     return render(request, 'Store/register.html', context)
+
+def login_view(request):
+
+    if request.method =="POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        user = authenticate(request, username=username, password=password)
+
+
+        if user is not None:
+            login(request, user)
+            return redirect('store')
+        else:
+            return redirect('register')
+
+    context = {}
+    return render(request, 'Store/login.html', context)
+
+
+def logout_view(request):
+
+    logout(request)
+    return redirect('store')

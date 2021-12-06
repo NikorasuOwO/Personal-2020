@@ -7,31 +7,49 @@ import cv2
 from matplotlib import pyplot as plt
 from findtemplate import findtemplate
 
-img = cv2.imread('board.PNG', 0)
-templateBTC = cv2.imread('btc.PNG', 0)
-templateETH = cv2.imread('eth.PNG', 0)
-templateLTC = cv2.imread('ltc.PNG', 0)
-templateUSDC = cv2.imread('usdc.PNG', 0)
-templateXRP = cv2.imread('xrp.PNG', 0)
+### COLORS ###
+# (B, G, R)
+white = (255, 255, 255)
+green = (100, 255, 0)
+black = (0,0,0)
+blue = (255, 10, 10)
+red = (10, 10, 255)
 
+
+img = cv2.imread('board3.PNG')
+H, W, C = img.shape
+templateBTC = cv2.imread('btc.PNG')
+templateETH = cv2.imread('eth.PNG')
+templateLTC = cv2.imread('ltc.PNG')
+templateUSDC = cv2.imread('usdc.PNG')
+templateXRP = cv2.imread('xrp.PNG')
+templateBOMB = cv2.imread('bomb.PNG')
 if img is None:
     print("img or template not found")
     quit()
 
 img2 = img.copy()
-total = {}
+info = {}
 #BTC
-total["BTC"]= findtemplate(img, img2, templateBTC, 150, cv2.TM_SQDIFF_NORMED)
+info["BTC"] = {}
+info["BTC"]["count"], info["BTC"]["points"] = findtemplate(img, img2, templateBTC, green, cv2.TM_SQDIFF_NORMED, th=0.08) # t=0.2
 
 #ETH
-total["ETH"]= findtemplate(img, img2, templateETH, 50, cv2.TM_SQDIFF_NORMED)
-#LTC
-total["LTC"]= findtemplate(img, img2, templateLTC, 100, cv2.TM_SQDIFF_NORMED)
-#USDC
-total["USDC"]= findtemplate(img, img2, templateUSDC, 0, cv2.TM_SQDIFF_NORMED)
-#XRP
-total["XRP"]= findtemplate(img, img2, templateXRP, 255, cv2.TM_SQDIFF)
+info["ETH"] = {}
+info["ETH"]["count"], info["ETH"]["points"] = findtemplate(img, img2, templateETH, green, cv2.TM_SQDIFF_NORMED, th=0.28) # t=0.2
 
+#LTC
+info["LTC"] = {}
+info["LTC"]["count"], info["LTC"]["points"] = findtemplate(img, img2, templateLTC, green, cv2.TM_SQDIFF_NORMED, th=0.07) # t=0.2
+#USDC
+info["USDC"] = {}
+info["USDC"]["count"], info["USDC"]["points"] = findtemplate(img, img2, templateUSDC, green, cv2.TM_SQDIFF_NORMED, th=0.16) # t=0.2
+#XRP
+info["XRP"] = {}
+info["XRP"]["count"], info["XRP"]["points"] = findtemplate(img, img2, templateXRP, green, cv2.TM_SQDIFF_NORMED, th=0.35) # t=0.2
+#BOMB
+info["BOMB"] = {}
+info["BOMB"]["count"], info["BOMB"]["points"] = findtemplate(img, img2, templateBOMB, red, cv2.TM_SQDIFF_NORMED, th=0.35) # t=0.2
 
 cv2.imshow('Image', img)
 cv2.imshow('Match', img2)
@@ -40,4 +58,33 @@ cv2.imshow('Match', img2)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-print(total) 
+print(info)
+print(sum( [coin["count"] for coin in info.values() ] ))
+
+
+#MAPPING TO ONE GRID
+
+grid = np.zeros((10, 6))
+
+
+# ASIGNING COINS POSITIONS ON THE GRID
+i = 1
+
+#coords_list = [BTCpoints, ETHpoints, LTCpoints, USDCpoints, XRPpoints, BOMBpoints]
+
+for coin in info.values():
+    coin["grid_index"] = []
+    for point in coin["points"]:
+        x, y = point
+        xgrid = int(np.interp(x, [0, W], [0, 6]))
+        ygrid = int(np.interp(y, [0, H], [0, 10]))
+        coin["grid_index"].append((xgrid, ygrid))
+        try:
+            grid[ygrid][xgrid] = i
+        except IndexError:
+            print("ERROR INDEXING" + str(i) + "coords list at indexes: " + str(point) )
+    i = i + 1
+
+print(grid)
+print()
+print(info["BTC"])

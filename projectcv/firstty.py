@@ -9,9 +9,9 @@ import numpy as np
 
 def click(x,y, delay):
     win32api.SetCursorPos((x,y))
-    #win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,0,0)
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,0,0)
     time.sleep(delay)
-    #win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,0,0)
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,0,0)
 
 def print_coords():
     while True:
@@ -34,7 +34,7 @@ def find_finish(nombre_template):
     result = cv2.matchTemplate(img, template, method)
     loc = np.where( result <= th) # filter the results
     if np.shape(loc) == (2,0):
-        print(f"No se encuentra {nombre_template}", flush=True)
+        #print(f"No se encuentra {nombre_template}", flush=True)
         return None
     #print(np.shape(loc))
     yav = loc[0][0]+(h//2)
@@ -50,7 +50,7 @@ def find_finish(nombre_template):
 
 def intenta_salir():
 
-    lista = ["flechita", "flechita2", "x2", "x3", "x4", "x5", "x6", "x7", "x8", "x9", "x10", "x11", "x13"]
+    lista = ["flechita", "flechita2", "x2", "x3", "x4", "x5", "x6", "x7", "x8", "x9", "x10", "x11", "x13", "x14", "x15", "x16"]
     #lista = ["flechita", "flechita2"]
 
     for template in lista:
@@ -67,7 +67,7 @@ def intenta_salir():
     return False
 
 def en_partida():
-    posicion_template = find_cross("partida_img.PNG")
+    posicion_template = find_finish("partida_img.PNG")
     if posicion_template is not None:
         return True
     else:
@@ -79,14 +79,21 @@ video_res = None
 
 #video_res = find_finish("video.PNG")
 #win32api.SetCursorPos((video_res[0], video_res[1]))
+if intenta_salir() == False: pass
+sleep(5)
 intenta_salir()
-while False:
+if find_finish("wait_img.PNG") is not None:
+    print("ESPERAMOS 35 MINUTOS", flush=True)
+    sleep(60*35)
+    click(1161, 660, 0.4) #Click en OK
+
+while True:
     clicks_linea = 6
     for j in range(0,10,1):
         finish_res = find_finish("final.PNG")
         if finish_res is not None:
             click(finish_res[0], finish_res[1], 0.4)
-            sleep(2)
+            sleep(1)
             video_res = find_finish("video.PNG")
             click(video_res[0], video_res[1], 0.4)
             break
@@ -94,6 +101,7 @@ while False:
             video_res = find_finish("video.PNG")
             if video_res is not None:
                 click(video_res[0], video_res[1], 0.4)
+                sleep(2)
                 break
             if clicks_linea == 6:
                 pared_res = find_finish("pared.PNG")
@@ -105,16 +113,43 @@ while False:
             else: exit(10)
     if video_res and not en_partida():
         print("Esperando a que pase el anuncio.", flush=True)
-        sleep(30)
+        sleep(40)
         print("Probando click hacia atrás.", flush=True)
         click(1900, 954, 0.2)
         click(1900, 954, 0.2)
+        sleep(2)
         if(en_partida()): break
         print("Esperando a que pase el anuncio 10s.", flush=True)
         sleep(10)
+        sleep(10)
         if intenta_salir() == True:
+            sleep(0.5)
+            intenta_salir()
+            click(1900, 954, 0.2)
+            click(1900, 954, 0.2)
+            sleep(5)
+            intenta_salir()
+            sleep(1)
             video_res = None
             print("Reanudamos: MODO AUTOMATICO. Pulsa q para terminar elñ programa", flush=True)
         else:
             print("NO PODEMOS SALIR", flush=True)
-            exit(28)
+            click(950, 520, 0.4) #CLIK AL AZAR
+            sleep(2)
+            click(1900, 954, 0.2)
+            click(1900, 954, 0.2)
+            sleep(3)
+            if(not en_partida() and intenta_salir()==False):    
+                if find_finish("wait_img.PNG") is not None:
+                    print("ESPERANDO 35 MINUTOS!", flush=True)
+                    sleep(60*35)
+                    click(1161, 660, 0.4) #Click en OK
+                else:
+                    click(950, 520, 0.4) #CLIK AL AZAR
+                    sleep(2)
+                    click(1900, 954, 0.2)
+                    click(1900, 954, 0.2)
+                    sleep(2)
+                    if intenta_salir()==True:
+                        break
+                    pass

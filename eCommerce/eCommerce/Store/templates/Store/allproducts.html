@@ -1,0 +1,19 @@
+<head>
+
+    {% load static %}
+    {% load Store_extras %}
+
+</head>
+{% if number == 0 %}
+        <p class="information"> No se han encontrado productos que satisfagan sus requisitos, lo lamentamos. </p>
+<div class="container" id="allproducts">
+    {% endif %}
+    {% for prod in products%}
+        <div class="card" onclick="location.href = 'product/{{prod.id}}/';">
+            <h2 class="card-h">{{prod.name}}</h2>
+            <img src="{% static '/media/'|addstr:prod.image %}" style="height:40%">
+            <p>{{prod.description}}</p>
+            <h2><strong>${{prod.price}}</strong><h2>
+        </div>
+    {%endfor%}
+</div>

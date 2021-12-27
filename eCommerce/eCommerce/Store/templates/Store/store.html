@@ -3,7 +3,10 @@
         {% load Store_extras %}
 
 {% block content %}
-        <form action="{% url 'store' %}" method="post">
+        <!--<form action="{% url 'store' %}" method="post">-->
+        <form hx-post="{% url 'store' %}"
+         hx-target="#allproducts"
+         hx-swap="innerHTML">
         
             {% csrf_token %}
             <h2>Filter</h2>
@@ -16,10 +19,10 @@
 
         </form>
             <h1>ALL PRODUCTS</h1>
-        <div class="container">
+        <div class="container" id="allproducts">
             {% for prod in products%}
                 <div class="card" onclick="location.href = 'product/{{prod.id}}/';">
-                    <h2>{{prod.name}}</h2>
+                    <h2 class="card-h">{{prod.name}}</h2>
                     <img src="{% static '/media/'|addstr:prod.image %}" style="height:40%">
                     <p>{{prod.description}}</p>
                     <h2><strong>${{prod.price}}</strong><h2>

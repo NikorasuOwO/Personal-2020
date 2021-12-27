@@ -2,7 +2,7 @@ from Store.models import Product
 from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
 from . import forms
 from django.db.models import Q
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 # Create your views here.
@@ -13,8 +13,6 @@ def redirect_store(request, *args, **kargs):
 def store(request):
 
     if request.method == 'POST':
-
-        template_to_render='Store/allproducts.html'
     
         filter_form = forms.FilterForm(request.POST)
         products = Product.objects.all()
@@ -42,17 +40,15 @@ def store(request):
                 products = products.order_by('name')
             else: products = products.order_by('-name')
 
-    else: # If no constraint or GET
+    else: # If no constraint
         products = Product.objects.order_by('name')
         filter_form = forms.FilterForm(initial={'type': 'any', 'color':'any'})
-        template_to_render = 'Store/store.html'
-        
 
     context = {"products":products, "number":products.count()}
 
     context["filter_form"] = filter_form
 
-    return render(request, template_to_render, context)
+    return render(request, 'Store/store.html', context)
 
 def view_prod(request, id):
 
@@ -80,11 +76,6 @@ def register_view(request):
     return render(request, 'Store/register.html', context)
 
 def login_view(request):
-
-    if request.method =="GET":
-        form = AuthenticationForm()
-        context = {"form":form}
-        return render(request, 'Store/login.html', context)
 
     if request.method =="POST":
         username = request.POST.get("username")

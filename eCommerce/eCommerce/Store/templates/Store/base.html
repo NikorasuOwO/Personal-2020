@@ -5,10 +5,13 @@
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Shoes store</title>
+        <title>Shoes shop</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{% static '/styles.css' %}">
+        <script src="https://unpkg.com/petite-vue" defer init></script>
+        <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+
     </head>
     <body>
         <header>
@@ -17,8 +20,7 @@
             <nav>
                 </a>
                 <ul class="nav-list">
-                    <item><a href="{% url 'store' %}" class="left">Home</a></item>
-                    <item><a {%if request.path == "/store/"%} class="active" {% endif %} href="{% url 'store' %}">Store</a></item>
+                    <item><a {%if request.path == "/store/"%} class="active left" {% endif %} class="left" href="{% url 'store' %}">Store</a></item>
                     <item><a href="#">About</a></item>
                     <item><a href="#">Contact</a></item>
                     <item><a {%if request.path == "/register/"%} class="active" {% endif %} href="{% url 'register' %}">Register</a></item>

@@ -1,11 +1,19 @@
-body {
-  background-image: url("media/pink3.jpg");
+body{
+
+  background-image: url("media/bgvertbleu.jpg");
+
 }
 
-h1, h2 {
+:root{
+
+  --elem_bg: rgb(20, 207, 150)
+
+}
+
+h1, h2, h3 {
   font-family: Rubik;
-  text-align: center; 
-  text-shadow: 3px 3px rgb(255, 2, 120);
+  text-align: center;
+  text-shadow: 6px 0.2em var(--elem_bg);
 }
 
 .form_type {
@@ -16,48 +24,30 @@ h1, h2 {
 p {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-weight: 800;
+  
+}
+
+.information{
+
+  text-align: center;
+  background-color: var(--elem_bg);
+  background-clip: 10;
+
 }
 
 .title{
   text-align: center;
   font-family: Rubik;
   font-weight: 800;
-  text-shadow: 3px 3px rgb(246, 67, 157);
+  text-shadow: 6px 0.2em var(--elem_bg);
   border-color: red;
   
 }
 
-.reglog {
-  
-  margin: 15px;
-
-  width: 300px;
-  height: 360px;
-
-  border-radius: 10px;
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
-  transition: all 0.2s;
-
-  font-weight: 500;
-  color: rgb(5, 0, 5);
-  font-size: auto;
-  text-align: right;
-
-  justify-items: right;
-  align-items: right;
-
-  margin-left: auto;
-  margin-right: auto;
-
-  text-align: center;
-
-}
-
 .container {
-    justify-content:safe;
+    justify-content:auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto;
 
 
 }
@@ -65,17 +55,17 @@ p {
 
 .card {
   
-    margin: 15px;
+    margin: 2em;
 
     width: 300px;
     height: 360px;
   
     border-radius: 10px;
-    box-shadow: 0px 3px 5px rgb(146, 3, 122);
+    box-shadow: 0px 3px 5px rgb(4, 52, 131);
     transition: all 0.2s;
 
     font-weight: 500;
-    color: rgb(110, 4, 75);
+    color: rgb(0, 0, 0);
     font-size: auto;
     text-align: left;
 
@@ -86,13 +76,16 @@ p {
     margin-right: auto;
 
     text-align: center;
-    background-color: white;
-    background-image: url("media/pink1.jpg");
+    background-color: var(--elem_bg);
 
   }
 
-  .card:hover{
+  .card-h {
+    text-shadow: 6px 0.2em rgb(4, 167, 126);
 
+  }
+  .card:hover{
+    cursor: pointer;
     transform: scale(1.05);
   }
 
@@ -121,13 +114,13 @@ p {
 
   .nav-list a{
     float: left;
-    color: white;
-    text-shadow: 2px 2px rgb(251, 58, 148);
+    color: rgb(0, 0, 0);
     text-align: center;
     padding: 15px 15px 15px 15px;
     text-decoration:none;
     font-size: 2em;
-    background-image: url("media/pink1.jpg");
+    background-color: var(--elem_bg);
+    text-shadow: 3px 0.1em rgb(4, 167, 126);
   }
 
   .nav-list a.left{
@@ -143,14 +136,12 @@ p {
   }
 
   .nav-list a:hover {
-    border-color: rgb(251, 58, 148);
+    border-color: var(--pink);
     color: black;
   }
 
   .nav-list a.active {
-    color: rgb(0, 0, 0);
-    text-decoration-color: rgb(255, 255, 255);
-    text-decoration-line:underline;
+    color: rgb(187, 246, 230);
   }
 
   .nav-list > li::before {

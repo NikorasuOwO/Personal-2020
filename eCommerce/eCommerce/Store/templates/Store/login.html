@@ -1,20 +1,35 @@
-<!DOCTYPE html>
-<html>
-    
-<head>
-	<title>Login</title>
-</head>
-<body>
+{% extends 'Store/base.html' %}
 
+        {% load static %}
+        {% load Store_extras %}
 
-<h3 >LOGIN</h3>
-       <form method="POST" action="">
-                {% csrf_token %}
-                <input type="text" name="username" placeholder="Username..." class="form-control">
-                <input type="password" name="password" placeholder="Password..." class="form-control" >
-                <input type="submit">
-        </form>
+{% block content %}
 
-</body>
+<div class="register_loging">
 
-</html>
+    <h1>Login</h1>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <p>
+            {{form.username.label}}
+            {{form.username}}
+            {% for error in form.username.errors %}
+                {{ error }}
+            {% endfor %}
+        </p>
+        <p>
+            {{form.password.label}}
+            {{form.password}}
+            
+            {% for error in form.password.errors %}
+                {{ error }}
+            {% endfor %}
+        </p>
+        <br>
+        <input type="submit" name="Login">
+    </form>
+</div>
+
+{% endblock %}
